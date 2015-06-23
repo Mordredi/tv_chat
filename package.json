@@ -1,0 +1,29 @@
+{
+  "name": "tv_chat",
+  "version": "1.0.0",
+  "description": "A chat room app for tv shows. Built for Bay Street Labs",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mordredi/tv_chat.git"
+  },
+  "keywords": [
+    "television",
+    "chat"
+  ],
+  "author": "Arthur Wright",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mordredi/tv_chat/issues"
+  },
+  "homepage": "https://github.com/Mordredi/tv_chat#readme",
+  "dependencies": {
+    "express": "^4.13.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
