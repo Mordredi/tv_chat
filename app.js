@@ -14,12 +14,22 @@ app.use(morgan('dev'));
 app.engine('handlebars', exphbs({defaultLayout: 'application'}));
 app.set('view engine', 'handlebars');
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(shows);
+app.use(users);
+
 app.get('/', function(req, res){
   res.render('home')
 });
 
-app.use(shows);
-app.use(users);
+var User = require('./models/user');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+mongoose.connect('mongodb://localhost/tv_chat');
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
