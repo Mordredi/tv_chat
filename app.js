@@ -1,9 +1,14 @@
 var app = require('express')();
+var exphbs  = require('express-handlebars');
 var http = require('http').Server(app);
 var io = require('socket.io')(http)
 
+
+app.engine('handlebars', exphbs({defaultLayout: 'application'}));
+app.set('view engine', 'handlebars');
+
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/views/index.html');
+  res.render('home')
 });
 
 io.on('connection', function(socket){
