@@ -4,16 +4,25 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http)
 var morgan = require('morgan');
 var mongoose = require('mongoose');
+var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var bodyParser = require('body-parser')
 var shows = require('./routes/shows');
 var users = require('./routes/users');
-
-app.use(morgan('dev'));
 
 app.engine('handlebars', exphbs({defaultLayout: 'application'}));
 app.set('view engine', 'handlebars');
 
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -11,14 +11,16 @@
     <div class="logo">TV Chat</div>
     <nav>
       <ul>
-        <!-- If logged in -->
+        {{#if user}}
           <li><a href="/shows">Shows</a></li>
           <li>Logout</li>
-        <!-- Else -->
-          <li>Login</li>
+        {{else}}
+          <li><a href="/login">Login</a></li>
           <li><a href="/register">Sign Up</a></li>
+        {{/if}}
       </ul>
     </nav>
+    <div> {{ user.username }} </div>
   </header>
   <main>
     {{{body}}}

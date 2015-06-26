@@ -5,20 +5,25 @@ var router = express.Router();
 
 router.get('/register', function(req, res) {
   res.render('users/new');
-  console.log("Hello!");
 });
 
 router.post('/register', function(req, res){
-  console.log(User);
   User.register(new User({ username: req.body.username}), req.body.password, function(err, user){
     if (err) {
-      return res.render('register', { user: user });
+      return res.render('../views/users/register', { user: user });
     }
-
     passport.authenticate('local')(req, res, function() {
       res.redirect('/shows')
     });
   });
+});
+
+router.get('/login', function(req, res) {
+  res.render('../views/users/login', { user : req.user });
+});
+
+router.post('/login', passport.authenticate('local'), function(req, res) {
+  res.redirect('/shows', { user : req.user });
 });
 
 module.exports = router;
