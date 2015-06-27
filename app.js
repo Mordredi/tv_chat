@@ -10,6 +10,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser')
 var shows = require('./routes/shows');
 var users = require('./routes/users');
+var User = require('./models/user');
+var Show = require('./models/show');
 
 app.engine('handlebars', exphbs({defaultLayout: 'application'}));
 app.set('view engine', 'handlebars');
@@ -25,7 +27,10 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 app.use(shows);
 app.use(users);
 
@@ -33,7 +38,6 @@ app.get('/', function(req, res){
   res.render('home')
 });
 
-var User = require('./models/user');
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());

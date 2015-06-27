@@ -19,7 +19,7 @@ router.post('/register', function(req, res){
 });
 
 router.get('/login', function(req, res) {
-  res.render('../views/users/login', { user : req.user });
+  res.render('../views/users/login');
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
