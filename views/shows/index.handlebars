@@ -1,1 +1,4 @@
 <h1>All Shows</h1>
+{{#each shows}}
+  <a href="shows/{{ this._id }}">{{ this.name }}</a>
+{{/each}}

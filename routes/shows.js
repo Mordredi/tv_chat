@@ -3,7 +3,9 @@ var Show = require('../models/show');
 var router = express.Router();
 
 router.get('/shows', function(req, res){
-  res.render('shows/index');
+  Show.find(function(err, shows){
+    res.render('shows/index', {shows: shows})
+  });
 });
 
 router.get('/shows/new', function(req, res){
@@ -13,20 +15,18 @@ router.get('/shows/new', function(req, res){
 router.post('/shows/new', function(req, res){
   var show = new Show({name: req.body.name});
   show.save(function(err, show){
-    var name = req.body.name;
     console.log(show.name);
-    if (err) res.render('shows/new');
-    res.redirect('/shows/' + name);
+    if (err) {
+      res.render('shows/new');
+    }
+    res.redirect('/shows/' + show._id);
   });
 });
 
-router.route('shows/:name')
-  .all(function(req, res, next){
-    var name = req.params.name;
-    var show = Show.find({name: name});
-  })
-  .get(function(req, res){
-    res.render('shows/show')
-  })
+router.get('/shows/:id', function(req, res){
+  Show.findOne({'_id': req.params.id}, function(err, show){
+    res.render('shows/show', {show: show});
+  });
+});
 
 module.exports = router;
