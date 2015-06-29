@@ -2,6 +2,10 @@ var express = require('express');
 var Show = require('../models/show');
 var router = express.Router();
 
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
+
 router.get('/shows', function(req, res){
   Show.find(function(err, shows){
     res.render('shows/index', {shows: shows})
@@ -25,7 +29,27 @@ router.post('/shows/new', function(req, res){
 
 router.get('/shows/:id', function(req, res){
   Show.findOne({'_id': req.params.id}, function(err, show){
-    res.render('shows/show', {show: show});
+    var episodes = show.episodes;
+    episodes = episodes.sort(function(a, b){
+      return a.episodeNumber - b.episodeNumber;
+    }).sort(function(a, b){
+      return a.season - b.season;
+    });
+    res.render('shows/show', {show: show, episodes: episodes});
+  });
+});
+
+router.post('/shows/:id', function(req, res){
+  var id = req.params.id;
+  Show.findByIdAndUpdate(id, { $push: { episodes: {title: req.body.title, season: req.body.season, episodeNumber: req.body.episodeNumber}}}, function(err, show){
+    res.redirect('/shows/' + id);
+  });
+});
+
+router.post('/shows/:show_id/:episode_id', function(req, res){
+  var id = req.user._id;
+  User.findByIdAndUpdate(id, { $push: { episodes: req.params.episode_id }}, function(err, show){
+    res.redirect('/shows/' + req.params.show_id);
   });
 });
 

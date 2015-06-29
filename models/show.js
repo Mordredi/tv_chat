@@ -5,8 +5,11 @@ var Show = new Schema({
   name: { type: String },
   episodes: [{
     title: {type: String},
-    episodeNumber: {type: Number}
+    episodeNumber: {type: Number},
+    season: {type: Number}
   }]
 });
+
+
 
 module.exports = mongoose.model('Show', Show);

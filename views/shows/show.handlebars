@@ -1,1 +1,16 @@
 <h1>{{ show.name }}</h1>
+<ul>
+  {{#each episodes }}
+    <li id="{{this._id}}">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-id="{{this._id}}">Seen it</a></li>
+  {{/each}}
+</ul>
+<a href="#">Add Episode</a>
+<form action="/shows/{{show._id}}" method="post" class="form-episode">
+  <label for="title">Title</label>
+  <input type="text" id="title" name="title">
+  <label for="season">Season</label>
+  <input type="number" id="season" name="season">
+  <label for="episode-number">Episode Number</label>
+  <input type="number" id="episode-number" name="episodeNumber">
+  <button type="submit">Submit</button>
+</form>
