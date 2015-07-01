@@ -1,5 +1,8 @@
 var express = require('express');
 var Show = require('../models/show');
+var User = require('../models/user');
+var Chat = require('../models/chat');
+var WatchedEpisode = require('../models/watched_episode');
 var router = express.Router();
 
 function onlyUnique(value, index, self) {
@@ -19,7 +22,6 @@ router.get('/shows/new', function(req, res){
 router.post('/shows/new', function(req, res){
   var show = new Show({name: req.body.name});
   show.save(function(err, show){
-    console.log(show.name);
     if (err) {
       res.render('shows/new');
     }
@@ -41,15 +43,57 @@ router.get('/shows/:id', function(req, res){
 
 router.post('/shows/:id', function(req, res){
   var id = req.params.id;
-  Show.findByIdAndUpdate(id, { $push: { episodes: {title: req.body.title, season: req.body.season, episodeNumber: req.body.episodeNumber}}}, function(err, show){
-    res.redirect('/shows/' + id);
+  Show.findByIdAndUpdate(id, { $push: { episodes: {title: req.body.title, season: req.body.season, episodeNumber: req.body.episodeNumber}}}, { new: true }, function(err, show){
+    if (err) {
+      console.log("Error");
+      res.render('/shows/' + id)
+    }
+    var episodes = show.episodes;
+    var episode = episodes[episodes.length - 1];
+    var episode_id = episode._id;
+    var chat = new Chat({ episode_id: episode_id });
+    chat.save(function(err, chat){
+      if (err) {
+        res.render('shows/' + id);
+      }
+      console.log(chat._id);
+      res.redirect('/shows/' + id);
+    });
   });
 });
 
+
 router.post('/shows/:show_id/:episode_id', function(req, res){
-  var id = req.user._id;
-  User.findByIdAndUpdate(id, { $push: { episodes: req.params.episode_id }}, function(err, show){
-    res.redirect('/shows/' + req.params.show_id);
+  var user = req.user;
+  var show = req.params.show_id;
+  var id = user._id;
+  var episode = req.params.episode_id;
+  var watched_episode = new WatchedEpisode({ user_id: id, episode_id: episode });
+  watched_episode.save(function(err, watched_episode){
+    if (err) {
+      console.log('error');
+      res.render('shows/' + show);
+    }
+    console.log('Saved');
+    res.redirect('/shows/' + show);
+  })
+});
+
+router.get('/shows/:episode_id/chat', function(req, res){
+  var episode_id = req.params.episode_id;
+  var episodes;
+  var episode;
+  Chat.findOne({episode_id: episode_id}, function(err, chat){
+    Show.findOne({ 'episodes': {$elemMatch: {_id: episode_id} } }, function(err, show){
+      episodes = show.episodes;
+      for(var i = 0; i < episodes.length; i++){
+        if (episodes[i]._id == episode_id) {
+          episode = episodes[i];
+        }
+      }
+      console.log(episode);
+      res.render('shows/chat', {chat: chat, show: show, episode: episode})
+    });
   });
 });
 

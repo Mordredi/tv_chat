@@ -1,7 +1,9 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var exphbs  = require('express-handlebars');
 var http = require('http').Server(app);
-var io = require('socket.io')(http)
+var io = require('socket.io')(http);
+var session = require('express-session');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
@@ -12,18 +14,24 @@ var shows = require('./routes/shows');
 var users = require('./routes/users');
 var User = require('./models/user');
 var Show = require('./models/show');
+var WatchedEpisode = require('./models/watched_episode');
+var Chat = require('./models/chat');
 
 app.engine('handlebars', exphbs({defaultLayout: 'application'}));
 app.set('view engine', 'handlebars');
 
+app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('express-session')({
-      secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie:{
+    maxAge: 3600000
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -39,8 +47,15 @@ app.get('/', function(req, res){
 });
 
 passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 mongoose.connect('mongodb://localhost/tv_chat');
 

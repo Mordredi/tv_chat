@@ -1,7 +1,7 @@
 <h1>{{ show.name }}</h1>
-<ul>
+<ul class="episodes" data-show="{{show._id}}">
   {{#each episodes }}
-    <li id="{{this._id}}">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-id="{{this._id}}">Seen it</a></li>
+    <li id="{{this._id}}">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-ep="{{this._id}}" class="btn-seen">Seen it</a><a href="/shows/{{this._id}}/chat">Enter Chat Room</a></li>
   {{/each}}
 </ul>
 <a href="#">Add Episode</a>
