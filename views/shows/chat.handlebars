@@ -1,19 +1,12 @@
-<h1>{{show.name}}: {{episode.title}}</h1>
+<div id="" class="chat-room" data-room="{{episode._id}}">
+  <h1>{{show.name}}: {{episode.title}}</h1>
 
-<ul id="messages"></ul>
-<form action="">
-  <input id="m" autocomplete="off" /><button>Send</button>
-</form>
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>
-  var socket = io();
-  $('form').submit(function(){
-    socket.emit('chat message', $('#m').val());
-    $('#m').val('');
-    return false;
-  });
-  socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg));
-  });
-</script>
+  <ul id="messages">
+    {{#each messages}}
+      <li>{{this.username}}: {{this.message}}</li>
+    {{/each}}
+  </ul>
+  <form action="" id="chat-form">
+    <input id="m" autocomplete="off" /><button id="btn-message" data-user="{{user.username}}" data-chat="{{chat._id}}">Send</button>
+  </form>
+</div>

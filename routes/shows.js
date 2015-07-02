@@ -56,7 +56,6 @@ router.post('/shows/:id', function(req, res){
       if (err) {
         res.render('shows/' + id);
       }
-      console.log(chat._id);
       res.redirect('/shows/' + id);
     });
   });
@@ -83,6 +82,7 @@ router.get('/shows/:episode_id/chat', function(req, res){
   var episode_id = req.params.episode_id;
   var episodes;
   var episode;
+  var messages;
   Chat.findOne({episode_id: episode_id}, function(err, chat){
     Show.findOne({ 'episodes': {$elemMatch: {_id: episode_id} } }, function(err, show){
       episodes = show.episodes;
@@ -91,9 +91,22 @@ router.get('/shows/:episode_id/chat', function(req, res){
           episode = episodes[i];
         }
       }
-      console.log(episode);
-      res.render('shows/chat', {chat: chat, show: show, episode: episode})
+      messages = chat.messages;
+      res.render('shows/chat', {chat: chat, show: show, episode: episode, messages: messages})
     });
+  });
+});
+
+router.post('/shows/:episode_id/chat/:chat_id', function(req, res){
+  var username = req.user.username;
+  var chat = req.params.chat_id;
+  var message = req.body.message;
+  console.log(message);
+  Chat.findByIdAndUpdate(chat, { $push: { messages: { username: username, message: message }}}, function(err, chat){
+    if (err) {
+      console.log('error');
+    }
+    console.log('success');
   });
 });
 

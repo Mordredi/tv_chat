@@ -60,8 +60,17 @@ passport.deserializeUser(function(id, done) {
 mongoose.connect('mongodb://localhost/tv_chat');
 
 io.on('connection', function(socket){
+  socket.on('create', function(room){
+    socket.room = room;
+    socket.join(room);
+  });
+  socket.on('join', function(username){
+    socket.username = username;
+  });
   socket.on('chat message', function(msg){
-    io.emit('chat message', msg)
+    var username = socket.username;
+    socket.broadcast.in(socket.room).emit('chat message', username + ": " + msg);
+    socket.emit('chat message', username + ": " + msg);
   });
 });
 
