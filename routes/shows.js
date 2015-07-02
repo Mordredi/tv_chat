@@ -74,7 +74,7 @@ router.post('/shows/:show_id/:episode_id', function(req, res){
       res.render('shows/' + show);
     }
     console.log('Saved');
-    res.redirect('/shows/' + show);
+    // res.redirect('/shows/' + show);
   })
 });
 
