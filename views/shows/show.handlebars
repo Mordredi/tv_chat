@@ -1,16 +1,29 @@
 <h1>{{ show.name }}</h1>
 <ul class="episodes" data-show="{{show._id}}">
   {{#each episodes }}
-    <li id="{{this._id}}">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-ep="{{this._id}}" class="btn-seen">Seen it</a><a href="/shows/{{this._id}}/chat" class="btn-chat">Enter Chat Room</a></li>
+    {{#if this.watched }}
+      <li id="{{this._id}}" class="watched">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-ep="{{this._id}}" class="btn btn-seen">Seen it</a><a href="/shows/{{this._id}}/chat" class="btn btn-chat">Enter Chat Room</a></li>
+    {{else}}
+      <li id="{{this._id}}">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-ep="{{this._id}}" class="btn btn-seen">Seen it</a><a href="/shows/{{this._id}}/chat" class="btn btn-chat">Enter Chat Room</a></li>
+    {{/if}}
   {{/each}}
 </ul>
-<a href="#">Add Episode</a>
-<form action="/shows/{{show._id}}" method="post" class="form-episode">
-  <label for="title">Title</label>
-  <input type="text" id="title" name="title">
-  <label for="season">Season</label>
-  <input type="number" id="season" name="season">
-  <label for="episode-number">Episode Number</label>
-  <input type="number" id="episode-number" name="episodeNumber">
-  <button type="submit">Submit</button>
-</form>
+<a href="#" class="add">Add Episode</a>
+<div class='new'>
+  <form action="/shows/{{show._id}}" method="post" class="form-episode">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="season">Season</label>
+      <input type="number" id="season" name="season" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="episode-number">Episode Number</label>
+      <input type="number" id="episode-number" name="episodeNumber" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+  <a href="#" class="close">Close</a>
+</div>

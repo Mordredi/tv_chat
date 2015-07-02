@@ -9,19 +9,21 @@
 </head>
 <body>
   <header>
-    <div class="logo">TV Chat</div>
-    <nav>
-      <ul>
-        {{#if user}}
-          <li><a href="/shows">Shows</a></li>
-          <li><a href="/logout">Logout</a></li>
-        {{else}}
-          <li><a href="/login">Login</a></li>
-          <li><a href="/register">Sign Up</a></li>
-        {{/if}}
-      </ul>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <a href="/" class="navbar-brand">TV Chat</a>
+        <ul class="nav navbar-nav navbar-right">
+          {{#if user}}
+            <li><a>{{ user.username }}</a></li>
+            <li><a href="/shows">Shows</a></li>
+            <li><a href="/logout">Logout</a></li>
+          {{else}}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Sign Up</a></li>
+          {{/if}}
+        </ul>
+      </div>
     </nav>
-    <div> {{ user.username }} </div>
   </header>
   <main>
     {{{body}}}
@@ -31,5 +33,6 @@
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script src="/js/watched.js"></script>
   <script src="/js/socket.js"></script>
+  <script src="/js/add.js"></script>
 </body>
 </html>

@@ -1,4 +1,21 @@
-<h1>All Shows</h1>
-{{#each shows}}
-  <a href="/shows/{{ this._id }}">{{ this.name }}</a>
-{{/each}}
+<div>
+  <h1>All Shows</h1>
+  <ul class="shows">
+    {{#each shows}}
+      <li><a href="/shows/{{ this._id }}">{{ this.name }}</a></li>
+    {{/each}}
+  </ul>
+<a href="#" class="add">Add New Show</a>
+</div>
+
+<div class="new">
+  <h1>New Show</h1>
+  <form action="/shows/new" method="post" class="form">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+  <a href="#" class="close">Close</a>
+</div>

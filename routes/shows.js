@@ -37,7 +37,17 @@ router.get('/shows/:id', function(req, res){
     }).sort(function(a, b){
       return a.season - b.season;
     });
-    res.render('shows/show', {show: show, episodes: episodes});
+    WatchedEpisode.find({ user_id: req.user._id}, function(err, watched_episodes){
+      var watched_episodes = watched_episodes;
+      for (var i = 0; i < watched_episodes.length; i++) {
+        for(var j = 0; j < episodes.length; j++){
+          if (watched_episodes[i].episode_id == episodes[j]._id) {
+            episodes[j].watched = true;
+          }
+        }
+      }
+      res.render('shows/show', {show: show, episodes: episodes});
+    });
   });
 });
 
@@ -74,7 +84,6 @@ router.post('/shows/:show_id/:episode_id', function(req, res){
       res.render('shows/' + show);
     }
     console.log('Saved');
-    // res.redirect('/shows/' + show);
   })
 });
 
