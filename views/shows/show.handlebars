@@ -2,9 +2,9 @@
 <ul class="episodes" data-show="{{show._id}}">
   {{#each episodes }}
     {{#if this.watched }}
-      <li id="{{this._id}}" class="watched">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-ep="{{this._id}}" class="btn btn-seen">Seen it</a><a href="/shows/{{this._id}}/chat" class="btn btn-chat">Enter Chat Room</a></li>
+      <li id="{{this._id}}" class="episode watched">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-ep="{{this._id}}" class="btn btn-seen">Seen it</a><a href="/shows/{{this._id}}/chat" class="btn btn-chat">Enter Chat Room</a></li>
     {{else}}
-      <li id="{{this._id}}">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-ep="{{this._id}}" class="btn btn-seen">Seen it</a><a href="/shows/{{this._id}}/chat" class="btn btn-chat">Enter Chat Room</a></li>
+      <li id="{{this._id}}" class="episode">{{ this.title }}: Season {{this.season}} Episode {{this.episodeNumber}} <a href="#" data-ep="{{this._id}}" class="btn btn-seen">Seen it</a><a href="/shows/{{this._id}}/chat" class="btn btn-chat">Enter Chat Room</a></li>
     {{/if}}
   {{/each}}
 </ul>

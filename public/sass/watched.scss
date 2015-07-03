@@ -1,0 +1,13 @@
+.episode {
+  .btn.btn-chat {
+    display: none;
+  }
+  &.watched {
+    .btn.btn-chat {
+      display: inline-block;
+    }
+    .btn.btn-seen {
+      display: none;
+    }
+  }
+}

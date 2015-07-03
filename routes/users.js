@@ -1,6 +1,8 @@
 var express = require('express');
 var passport = require('passport');
 var User = require('../models/user');
+var Show = require('../models/show');
+var WatchedEpisode = require('../models/watched_episode');
 var router = express.Router();
 
 router.get('/register', function(req, res) {

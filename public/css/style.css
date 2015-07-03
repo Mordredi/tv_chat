@@ -1,2 +1,103 @@
+body {
+  background: #000;
+  color: #fff; }
+
+ul {
+  list-style: none; }
+
+main {
+  text-align: center; }
+
+.shows {
+  text-align: center;
+  padding: 0; }
+
+h1 {
+  margin: 0;
+  margin-bottom: 2rem; }
+
+.navbar {
+  border-radius: 0; }
+
+a.show {
+  font-size: 2.5rem;
+  color: #fff; }
+
+.new, .login, .register {
+  width: 30rem;
+  margin: 0 auto; }
+
 .new {
   display: none; }
+  .new .show {
+    display: block; }
+
+.episode .btn.btn-chat {
+  display: none; }
+
+.episode.watched .btn.btn-chat {
+  display: inline-block; }
+
+.episode.watched .btn.btn-seen {
+  display: none; }
+
+.btn-chat {
+  color: red; }
+  .btn-chat:hover {
+    color: #d60000; }
+
+.add {
+  color: #fff; }
+  .add:hover {
+    color: #fff;
+    text-decoration: underline; }
+
+.close {
+  color: #fff;
+  opacity: 1;
+  text-shadow: 0 0 0; }
+  .close:hover {
+    color: #fff;
+    opacity: 1;
+    text-shadow: 0 1px 1px red; }
+
+.chat-room {
+  margin-bottom: 2rem; }
+
+.chat-window {
+  background: #eee;
+  color: #222;
+  height: 35rem;
+  margin-bottom: 2rem; }
+  .chat-window .chat-messages {
+    text-align: left;
+    padding: 1rem;
+    height: 24.5rem;
+    overflow: auto;
+    border-top: 1px solid #ccc; }
+  .chat-window .chat-users {
+    padding: 1rem;
+    height: 10.5rem;
+    overflow: auto; }
+  .chat-window #messages {
+    padding: 0; }
+    .chat-window #messages li:nth-child(odd) {
+      color: red; }
+
+#chat-form {
+  margin-bottom: 1rem; }
+
+.return {
+  color: #fff; }
+  .return:hover {
+    color: #fff;
+    text-decoration: underline; }
+
+@media screen and (min-width: 768px) {
+  .chat-window .chat-messages {
+    border-left: 1px solid #ccc;
+    height: 35rem; }
+  .chat-window .chat-users {
+    height: 35rem; }
+  .chat-window #messages li:nth-child(odd) {
+    color: red; } }

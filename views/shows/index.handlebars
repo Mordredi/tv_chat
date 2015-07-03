@@ -2,7 +2,7 @@
   <h1>All Shows</h1>
   <ul class="shows">
     {{#each shows}}
-      <li><a href="/shows/{{ this._id }}">{{ this.name }}</a></li>
+      <li><a href="/shows/{{ this._id }}" class="show">{{ this.name }}</a></li>
     {{/each}}
   </ul>
 <a href="#" class="add">Add New Show</a>

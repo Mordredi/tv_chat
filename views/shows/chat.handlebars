@@ -1,12 +1,23 @@
-<div id="" class="chat-room" data-room="{{episode._id}}">
+<div class="chat-room" data-room="{{episode._id}}">
   <h1>{{show.name}}: {{episode.title}}</h1>
 
-  <ul id="messages">
-    {{#each messages}}
-      <li>{{this.username}}: {{this.message}}</li>
-    {{/each}}
-  </ul>
+  <div class="chat-window container-fluid">
+    <div class="row">
+      <div class="chat-users col-xs-12 col-sm-4"></div>
+      <div class="chat-messages col-xs-12 col-sm-8">
+        <ul id="messages">
+          {{#each messages}}
+            <li>{{this.username}}: {{this.message}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
   <form action="" id="chat-form">
-    <input id="m" autocomplete="off" /><button id="btn-message" data-user="{{user.username}}" data-chat="{{chat._id}}">Send</button>
+    <div class="form-group">
+      <input id="m" autocomplete="off" class="form-control"/>
+    </div>
+    <button id="btn-message" class="btn btn-default" data-user="{{user.username}}" data-chat="{{chat._id}}">Send</button>
   </form>
+  <a href="/shows/{{show._id}}" class="return">Return to {{show.name}}</a>
 </div>
