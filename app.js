@@ -62,8 +62,10 @@ mongoose.connect('mongodb://localhost/tv_chat');
 io.on('connection', function(socket){
   socket.on('create', function(room){
     socket.room = room;
+    socket.users = [];
     socket.join(room);
   });
+
   socket.on('join', function(username){
     socket.username = username;
   });

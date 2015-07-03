@@ -64,6 +64,10 @@ a.show {
 .chat-room {
   margin-bottom: 2rem; }
 
+.users {
+  list-style: none;
+  padding: 0; }
+
 .chat-window {
   background: #eee;
   color: #222;
