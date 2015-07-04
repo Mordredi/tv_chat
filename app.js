@@ -9,7 +9,8 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var flash = require('connect-flash');
 var shows = require('./routes/shows');
 var users = require('./routes/users');
 var User = require('./models/user');
@@ -39,6 +40,7 @@ app.use(function(req, res, next) {
   res.locals.user = req.user;
   next();
 });
+app.use(flash());
 app.use(shows);
 app.use(users);
 

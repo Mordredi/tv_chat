@@ -21,12 +21,17 @@ router.post('/register', function(req, res){
 });
 
 router.get('/login', function(req, res) {
-  res.render('../views/users/login');
+  res.locals.errors = req.flash();
+  var errors = res.locals.errors.error;
+  res.render('../views/users/login', {errors: errors});
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-  res.redirect('/shows');
-});
+router.post('/login', passport.authenticate('local', { successRedirect: '/shows',
+                                                       failureRedirect: '/login',
+                                                       failureFlash: true,
+                                                       successFlash: "Welcome!"
+                                                      })
+);
 
 router.get('/logout', function(req, res) {
   req.logout();

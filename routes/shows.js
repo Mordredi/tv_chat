@@ -10,8 +10,10 @@ function onlyUnique(value, index, self) {
 }
 
 router.get('/shows', function(req, res){
+  res.locals.success = req.flash();
+  var success = res.locals.success.success[0];
   Show.find(function(err, shows){
-    res.render('shows/index', {shows: shows})
+    res.render('shows/index', {shows: shows, success: success})
   });
 });
 
