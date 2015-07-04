@@ -4,6 +4,7 @@ $(document).on('ready', function(){
     var self = $(this);
     var episode = self.data('ep');
     var show = $('.episodes').data('show');
+    $('#' + episode).addClass('watched');
     $.ajax({
       url: '/shows/' + show + '/' + episode,
       dataType: 'script',

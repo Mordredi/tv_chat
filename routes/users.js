@@ -6,16 +6,20 @@ var WatchedEpisode = require('../models/watched_episode');
 var router = express.Router();
 
 router.get('/register', function(req, res) {
-  res.render('users/new');
+  res.locals.errors = req.flash();
+  var errors = res.locals.errors.error;
+  res.render('users/new', {errors: errors});
 });
 
 router.post('/register', function(req, res){
   User.register(new User({ username: req.body.username}), req.body.password, function(err, user){
     if (err) {
-      return res.render('../views/users/register', { user: user });
+      req.flash('error', 'Username already selected');
+      res.redirect('/register');
     }
     passport.authenticate('local')(req, res, function() {
-      res.redirect('/shows')
+      req.flash('success', 'Welcome to TV Chat!');
+      res.redirect('/shows');
     });
   });
 });
@@ -23,13 +27,14 @@ router.post('/register', function(req, res){
 router.get('/login', function(req, res) {
   res.locals.errors = req.flash();
   var errors = res.locals.errors.error;
+  console.log(res.locals.errors);
   res.render('../views/users/login', {errors: errors});
 });
 
 router.post('/login', passport.authenticate('local', { successRedirect: '/shows',
                                                        failureRedirect: '/login',
                                                        failureFlash: true,
-                                                       successFlash: "Welcome!"
+                                                       successFlash: "Welcome to TV Chat!"
                                                       })
 );
 

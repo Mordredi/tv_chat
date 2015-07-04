@@ -9,7 +9,15 @@ function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
 
-router.get('/shows', function(req, res){
+function isAuthenticated(req, res, next){
+  if (req.user) {
+    return next();
+  }
+  req.flash('error', 'Please login');
+  res.redirect('/login');
+}
+
+router.get('/shows', isAuthenticated, function(req, res){
   res.locals.success = req.flash();
   var success = res.locals.success.success[0];
   Show.find(function(err, shows){
