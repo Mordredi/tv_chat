@@ -60,7 +60,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-mongoose.connect('mongodb://localhost/tv_chat');
+mongoose.connect('mongodb://heroku_nnkzx80f:cc7fbkf2gnbabg1k89tinpjt4r@ds047782.mongolab.com:47782/heroku_nnkzx80f');
 
 io.on('connection', function(socket){
   socket.on('create', function(room){
