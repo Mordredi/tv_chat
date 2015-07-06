@@ -1,6 +1,9 @@
 {
   "name": "tv_chat",
   "version": "1.0.0",
+  "engines": {
+    "node": "0.12.x"
+  },
   "description": "A chat room app for tv shows. Built for Bay Street Labs",
   "main": "app.js",
   "scripts": {
@@ -21,8 +24,17 @@
   },
   "homepage": "https://github.com/Mordredi/tv_chat#readme",
   "dependencies": {
+    "body-parser": "^1.13.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.3.5",
     "express": "^4.13.0",
+    "express-handlebars": "^2.0.1",
+    "express-session": "^1.11.3",
     "mongoose": "^4.0.6",
+    "morgan": "^1.6.1",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^1.0.1",
     "socket.io": "^1.3.5"
   },
   "devDependencies": {
