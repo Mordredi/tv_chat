@@ -1,0 +1,22 @@
+.navbar-default {
+  background-color: #ce1e1e;
+  border-color: #a80000;
+  .navbar-nav>li>a, .navbar-brand {
+    color: #fff;
+    text-shadow: 0 1px 1px #000;
+    &:hover {
+      color: #fff;
+      text-shadow: 0 1px 1px #ce1e1e;
+    }
+  }
+  .navbar-toggle {
+    border-color: #fff;
+    &:hover, &:focus {
+      background-color: #a80000;
+    }
+    .icon-bar {
+      background-color: #fff;
+      box-shadow: 0 1px 1px #000;
+    }
+  }
+}

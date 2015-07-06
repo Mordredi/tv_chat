@@ -12,7 +12,7 @@ main {
   text-align: center;
   padding: 0; }
 
-h1 {
+h1, h2 {
   margin: 0;
   margin-bottom: 2rem; }
 
@@ -31,6 +31,12 @@ a.show {
   display: none; }
   .new .show {
     display: block; }
+
+.login .form-control, .new .form-control {
+  text-align: center; }
+
+.form-control:focus {
+  border-color: #ce1e1e; }
 
 .episode .btn.btn-chat {
   display: none; }
@@ -60,6 +66,22 @@ a.show {
     color: #fff;
     opacity: 1;
     text-shadow: 0 1px 1px red; }
+
+.btn-default {
+  color: #fff;
+  background-color: #ce1e1e;
+  border-color: #a80000;
+  text-shadow: 0 1px 1px #000; }
+  .btn-default:hover, .btn-default:focus, .btn-default:active {
+    color: #fff;
+    background-color: #a80000;
+    border-color: #a80000; }
+
+.btn-seen {
+  color: #fff; }
+  .btn-seen:hover {
+    color: #fff;
+    text-decoration: underline; }
 
 .chat-room {
   margin-bottom: 2rem; }
@@ -105,3 +127,20 @@ a.show {
     height: 35rem; }
   .chat-window #messages li:nth-child(odd) {
     color: red; } }
+
+.navbar-default {
+  background-color: #ce1e1e;
+  border-color: #a80000; }
+  .navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand {
+    color: #fff;
+    text-shadow: 0 1px 1px #000; }
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-brand:hover {
+      color: #fff;
+      text-shadow: 0 1px 1px #ce1e1e; }
+  .navbar-default .navbar-toggle {
+    border-color: #fff; }
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+      background-color: #a80000; }
+    .navbar-default .navbar-toggle .icon-bar {
+      background-color: #fff;
+      box-shadow: 0 1px 1px #000; }

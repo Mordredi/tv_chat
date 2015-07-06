@@ -19,7 +19,7 @@ function isAuthenticated(req, res, next){
 
 router.get('/shows', isAuthenticated, function(req, res){
   res.locals.success = req.flash();
-  var success = res.locals.success.success[0];
+  var success = res.locals.success.success;
   Show.find(function(err, shows){
     res.render('shows/index', {shows: shows, success: success})
   });

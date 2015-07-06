@@ -4,3 +4,13 @@
     display: block;
   }
 }
+
+.login, .new {
+  .form-control {
+    text-align: center;
+  }
+}
+
+.form-control:focus {
+  border-color: #ce1e1e;
+}
