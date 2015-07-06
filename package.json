@@ -8,7 +8,8 @@
   "description": "A chat room app for tv shows. Built for Bay Street Labs",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
