@@ -5,3 +5,6 @@ This is a site where users can add shows. When a user has watched a show they ar
 My first attempt at a Node app.
 
 Built using Node, Express, Socket.io, Bootstrap, Sass, and Gulp.
+
+The site is live at:
+https://whispering-badlands-3674.herokuapp.com/
